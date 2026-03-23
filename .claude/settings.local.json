@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/kellysmith/git/novalabs-ic-website/*.mjs)",
+      "Bash(npm list:*)",
+      "Read(//Users/kellysmith/.cache/**)",
+      "Bash(npx puppeteer:*)",
+      "Bash(ls ~/.cache/puppeteer/chrome*)",
+      "Read(//Users/kellysmith/Library/Caches/**)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(node screenshot.mjs http://localhost:3000 pass1)",
+      "Bash(node screenshot.mjs http://localhost:3000 pass2)",
+      "Bash(node -e \":*)",
+      "Bash(node screenshot.mjs http://localhost:3000 full)",
+      "Bash(node screenshot.mjs http://localhost:3000 final)",
+      "Bash(node screenshot-section.mjs http://localhost:3000 4245 spotlights-fixed)",
+      "Bash(node screenshot.mjs http://localhost:3000 final2)",
+      "Bash(ls -la /Users/kellysmith/git/novalabs-ic-website/brand_assets/*.png)",
+      "Bash(node screenshot.mjs http://localhost:3000 current-businesses)",
+      "Bash(git init:*)"
+    ]
+  }
+}

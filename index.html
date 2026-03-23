@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Labs Innovation Center</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "nova-orange":   "#F36E3D",
+            "orange-hover":  "#E05A2A",
+            "orange-active": "#C94E22",
+            "orange-wash":   "#FEF0EB",
+            "orange-light":  "#FAC3AF",
+            "nova-gray":     "#59595C",
+            "gray-dark":     "#3D3D40",
+            "gray-darkest":  "#2A2A2A",
+            "gray-light":    "#D6D6D7",
+            "light-accent":  "#F5F5F5",
+            "near-black":    "#1A1A1A",
+            "dark-nav":      "#2A2A2A",
+            "nav-text":      "#C0C0C0",
+            "ic-teal":       "#00AABD",
+            "teal-hover":    "#008FA0",
+            "teal-active":   "#007585",
+            "teal-wash":     "#E5F7F9",
+            "teal-light":    "#7FD4DF",
+            "link-blue":     "#009AE3",
+          },
+          fontFamily: {
+            futura: ['"Futura"', '"Century Gothic"', '"Trebuchet MS"', 'sans-serif'],
+            serif:  ['"Source Serif 4"', '"Georgia"', '"Times New Roman"', 'serif'],
+          },
+          maxWidth: {
+            content: "1024px",
+          },
+          letterSpacing: {
+            display: "-0.03em",
+            heading: "-0.02em",
+            subheading: "-0.01em",
+          },
+          lineHeight: {
+            display: "1.1",
+            h1: "1.15",
+            h2: "1.2",
+            h3: "1.25",
+            body: "1.7",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Source Serif 4", "Georgia", serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #59595C;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Typography helpers ─── */
+    .font-futura { font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif; }
+
+    h1, h2, h3, h4, h5, h6,
+    .nav-link, .btn, .label-ui, .caption { font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif; }
+
+    /* ─── Grain texture overlay ─── */
+    .grain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ─── Nav ─── */
+    #main-nav {
+      background: #2A2A2A;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #C0C0C0;
+      text-decoration: none;
+      padding: 4px 0;
+      position: relative;
+      transition: color 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F36E3D;
+      transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link:hover { color: #FFFFFF; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:focus-visible {
+      outline: 2px solid #F36E3D;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* ─── Buttons ─── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #F36E3D;
+      color: #FFFFFF;
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                  transform 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.18s ease;
+      box-shadow: 0 4px 16px rgba(243,110,61,0.32), 0 1px 4px rgba(0,0,0,0.12);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .btn-primary:hover {
+      background: #E05A2A;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(243,110,61,0.4), 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .btn-primary:active {
+      background: #C94E22;
+      transform: translateY(0);
+    }
+    .btn-primary:focus-visible {
+      outline: 2px solid #F36E3D;
+      outline-offset: 3px;
+    }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: border-color 0.18s ease,
+                  background 0.18s ease,
+                  transform 0.18s cubic-bezier(0.34,1.56,0.64,1);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .btn-outline-white:hover {
+      border-color: #FFFFFF;
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+    .btn-outline-white:active { transform: translateY(0); }
+    .btn-outline-white:focus-visible {
+      outline: 2px solid #FFFFFF;
+      outline-offset: 3px;
+    }
+
+    .btn-teal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #00AABD;
+      color: #FFFFFF;
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                  transform 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.18s ease;
+      box-shadow: 0 4px 16px rgba(0,170,189,0.3), 0 1px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .btn-teal:hover {
+      background: #008FA0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,170,189,0.4), 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .btn-teal:active { background: #007585; transform: translateY(0); }
+    .btn-teal:focus-visible { outline: 2px solid #00AABD; outline-offset: 3px; }
+
+    /* ─── Section label pill ─── */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .eyebrow-orange {
+      color: #F36E3D;
+    }
+    .eyebrow-teal {
+      color: #00AABD;
+    }
+
+    /* ─── Scroll Parallax Hero ─── */
+    #hero {
+      background: #111111;
+    }
+    #scroll-hero-wrapper {
+      height: calc(1900px + 100vh);
+      position: relative;
+      width: 100%;
+    }
+    #hero-center-img {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 170%;
+      clip-path: polygon(25% 25%, 75% 25%, 75% 75%, 25% 75%);
+      will-change: clip-path, background-size, opacity;
+    }
+    .para-img {
+      display: block;
+      border-radius: 8px;
+      will-change: transform, opacity;
+      margin-bottom: 40px;
+      pointer-events: none;
+    }
+    /* Workshop Schedule */
+    #workshop-schedule {
+      background: #111111;
+    }
+    .ws-item {
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 12px 36px;
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    #ws-heading {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* ─── Feature icon card ─── */
+    .feature-card {
+      background: #FFFFFF;
+      border: 1px solid #D6D6D7;
+      border-radius: 12px;
+      padding: 32px 24px;
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.22s ease,
+                  border-color 0.22s ease;
+      box-shadow: 0 2px 8px rgba(89,89,92,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: #FAC3AF;
+      box-shadow: 0 12px 32px rgba(243,110,61,0.12), 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ─── Business card ─── */
+    .biz-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #D6D6D7;
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.22s ease;
+      box-shadow: 0 2px 8px rgba(89,89,92,0.07), 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .biz-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(89,89,92,0.14), 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .biz-card-img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .biz-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .biz-card:hover .biz-card-img img {
+      transform: scale(1.04);
+    }
+    .biz-card-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.55) 0%, transparent 55%);
+    }
+
+    /* ─── Member spotlight card ─── */
+    .spotlight-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,170,189,0.1), 0 2px 6px rgba(0,0,0,0.06);
+      border: 1px solid #E5F7F9;
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.22s ease;
+    }
+    .spotlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,170,189,0.16), 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ─── Stat number ─── */
+    .stat-number {
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 55px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #F36E3D;
+    }
+
+    /* ─── Divider stripe ─── */
+    .stripe-divider {
+      height: 4px;
+      background: linear-gradient(to right, #F36E3D 0%, #00AABD 100%);
+    }
+
+    /* ─── Tag / badge ─── */
+    .tag {
+      display: inline-block;
+      font-family: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .tag-orange { background: #FEF0EB; color: #C94E22; }
+    .tag-teal   { background: #E5F7F9; color: #007585; }
+
+    /* ─── Footer ─── */
+    #footer {
+      background: #1A1A1A;
+    }
+    #footer a { transition: color 0.18s ease; }
+    #footer a:hover { color: #F36E3D; }
+    #footer a:focus-visible { outline: 2px solid #F36E3D; outline-offset: 2px; border-radius: 2px; }
+
+    /* ─── Utilities ─── */
+    .content-wrap {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 768px) {
+      .content-wrap { padding: 0 32px; }
+    }
+    @media (min-width: 1024px) {
+      .content-wrap { padding: 0 48px; }
+    }
+
+    .section-py {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    @media (min-width: 768px) {
+      .section-py { padding-top: 48px; padding-bottom: 48px; }
+    }
+    @media (min-width: 1024px) {
+      .section-py { padding-top: 64px; padding-bottom: 64px; }
+    }
+
+    /* scroll-reveal — elements start visible; JS hides & animates after first paint */
+    .reveal-anim {
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-anim.reveal-hidden {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    /* Nav responsive */
+    @media (max-width: 767px) {
+      .nav-desktop { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      #mobile-menu-btn { display: none !important; }
+    }
+
+    /* About section 2-col grid */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+    }
+
+    /* How it Works steps grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      position: relative;
+    }
+    .steps-grid .step-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: left;
+      padding: 24px 0;
+      gap: 20px;
+    }
+    .steps-grid .step-item:not(:last-child) {
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .steps-grid .step-circle {
+      flex-shrink: 0;
+      margin: 0;
+    }
+    .steps-grid .step-text {
+      padding-bottom: 0;
+    }
+    @media (min-width: 768px) {
+      .steps-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+      .steps-grid .step-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 24px;
+        gap: 0;
+        border-bottom: none !important;
+      }
+      .steps-grid .step-circle {
+        margin: 0 auto 20px;
+      }
+      .steps-grid .step-text {
+        padding-bottom: 40px;
+      }
+      .md-connector { display: block !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+════════════════════════════════════════════ -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="content-wrap">
+    <div style="display:flex; align-items:center; justify-content:space-between; height:72px; gap:24px;">
+
+      <!-- Left links -->
+      <div class="nav-desktop" style="display:flex; gap:32px; flex:1;">
+        <a href="#features" class="nav-link">What's here</a>
+        <a href="#businesses" class="nav-link">Businesses</a>
+      </div>
+
+      <!-- Logo (centered) -->
+      <a href="#" aria-label="Nova Labs Innovation Center — home" style="flex-shrink:0;">
+        <img src="brand_assets/NL_IC.png" alt="Nova Labs Innovation Center" style="height:48px; width:auto;" />
+      </a>
+
+      <!-- Right links -->
+      <div class="nav-desktop" style="display:flex; gap:32px; flex:1; justify-content:flex-end;">
+        <a href="#members" class="nav-link">Members</a>
+        <a href="#join" class="nav-link" style="color:#F36E3D;">Join the IC</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" aria-label="Open menu"
+        style="color:#C0C0C0; background:none; border:none; cursor:pointer; padding:8px; border-radius:4px; transition:color 0.18s ease; min-height:44px; min-width:44px; display:flex; align-items:center; justify-content:center;">
+        <i class="fa-solid fa-bars" style="font-size:20px;"></i>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div id="mobile-menu" style="display:none; padding-bottom:16px;">
+      <div style="display:flex; flex-direction:column; gap:4px; border-top:1px solid rgba(192,192,192,0.15); padding-top:12px;">
+        <a href="#features" class="nav-link" style="padding:10px 0;">What's here</a>
+        <a href="#businesses" class="nav-link" style="padding:10px 0;">Businesses</a>
+        <a href="#members" class="nav-link" style="padding:10px 0;">Members</a>
+        <a href="#join" class="nav-link" style="padding:10px 0; color:#F36E3D;">Join the IC</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO — Scroll Parallax
+════════════════════════════════════════════ -->
+<section id="hero" aria-label="Hero">
+  <div id="scroll-hero-wrapper">
+
+    <!-- Sticky center image: clip-path reveals on scroll -->
+    <div id="hero-center-img" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2670&auto=format&fit=crop');">
+      <!-- Dark overlay for contrast -->
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.48);z-index:1;"></div>
+      <!-- Hero text: fades in as image fully reveals -->
+      <div id="hero-text-overlay" aria-hidden="true" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;padding:40px;opacity:0;pointer-events:none;">
+        <div style="text-align:center;max-width:700px;">
+          <div class="section-eyebrow eyebrow-teal" style="margin-bottom:20px;justify-content:center;">
+            <i class="fa-solid fa-lightbulb" style="font-size:14px;"></i>
+            Nova Labs Innovation Center
+          </div>
+          <h1 style="font-size:clamp(38px,7vw,69px);font-weight:700;line-height:1.1;letter-spacing:-0.03em;color:#F5F5F5;margin:0 0 24px;font-family:'Futura','Century Gothic','Trebuchet MS',sans-serif;">
+            Turn your passion<br/>into a business
+          </h1>
+          <p style="font-size:20px;line-height:1.7;color:#D6D6D7;max-width:560px;margin:0 auto 40px;font-family:'Source Serif 4','Georgia',serif;">
+            The Nova Labs Innovation Center is a dedicated space for hobbyists and small business owners to grow their ideas into real, thriving ventures — with the tools, community, and support to make it happen.
+          </p>
+          <div style="display:flex;justify-content:center;">
+            <a href="#join" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> Build with us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom gradient: fades into dark workshop section -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:384px;background:linear-gradient(to bottom,rgba(17,17,17,0),#111111);z-index:3;pointer-events:none;"></div>
+
+    <!-- Parallax images -->
+    <div style="position:relative;z-index:2;margin:0 auto;max-width:1024px;padding:200px 16px 0;">
+
+      <img class="para-img" data-start="-200" data-end="200"
+           src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop"
+           alt="Woman working in a fabrication workshop"
+           style="width:33%;" />
+
+      <img class="para-img" data-start="200" data-end="-250"
+           src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=2670&auto=format&fit=crop"
+           alt="Metalwork and welding craft"
+           style="width:66%;margin-left:auto;margin-right:auto;" />
+
+      <img class="para-img" data-start="-200" data-end="200"
+           src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=2670&auto=format&fit=crop"
+           alt="Handcrafted tools and materials"
+           style="width:33%;margin-left:auto;" />
+
+      <img class="para-img" data-start="0" data-end="-500"
+           src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80&w=2670&auto=format&fit=crop"
+           alt="Craftsperson shaping wood at a workbench"
+           style="width:41.666%;margin-left:96px;" />
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     WHAT IS THE IC
+════════════════════════════════════════════ -->
+<section style="background:#1A1A1A; position:relative; overflow:hidden;" class="section-py grain">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 90% 50%, rgba(0,170,189,0.1) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 30%, rgba(243,110,61,0.08) 0%, transparent 55%); pointer-events:none; z-index:1;"></div>
+
+  <div class="content-wrap" style="position:relative; z-index:2;">
+    <div class="about-grid">
+
+      <!-- Text -->
+      <div style="max-width:500px;" class="reveal">
+        <div class="section-eyebrow eyebrow-orange" style="margin-bottom:16px;">
+          <i class="fa-solid fa-gear" style="font-size:13px;"></i>
+          About the IC
+        </div>
+
+        <h2 style="font-size:clamp(28px,5vw,44px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#F5F5F5; margin:0 0 24px; font-family:'Futura','Century Gothic',sans-serif;">
+          Where makers become entrepreneurs
+        </h2>
+
+        <p style="color:#D6D6D7; line-height:1.7; margin:0 0 20px;">
+          The Innovation Center is a dedicated section of Nova Labs built for members who want to take their hobby to the next level. Whether you're testing a product idea or running a growing small business, the IC has a space for you.
+        </p>
+
+        <p style="color:#A0A0A0; line-height:1.7; margin:0 0 32px;">
+          We support local makers at every stage — from early experiments to established brands. You'll find a community of people who've been exactly where you are, along with the resources to keep moving forward.
+        </p>
+
+        <a href="#join" class="btn-primary">Learn about membership</a>
+      </div>
+
+      <!-- Image -->
+      <div class="reveal" style="border-radius:12px; overflow:hidden; position:relative; min-height:300px;">
+        <img src="https://placehold.co/600x440/2A2A2A/F36E3D?text=Members+at+work"
+             alt="IC members collaborating at workbenches"
+             style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;" />
+        <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%); border-radius:12px;"></div>
+        <!-- Color treatment -->
+        <div style="position:absolute; inset:0; background:rgba(0,170,189,0.08); mix-blend-mode:multiply; border-radius:12px;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe-divider"></div>
+
+
+<!-- ═══════════════════════════════════════════
+     FEATURES — WHAT THE IC OFFERS
+════════════════════════════════════════════ -->
+<section id="features" class="section-py" style="background:#FFFFFF;">
+  <div class="content-wrap">
+
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <div class="section-eyebrow eyebrow-orange" style="justify-content:center; margin-bottom:16px;">
+        <i class="fa-solid fa-star" style="font-size:13px;"></i>
+        What's here
+      </div>
+      <h2 style="font-size:clamp(28px,5vw,44px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#1A1A1A; margin:0 auto 16px; max-width:600px; font-family:'Futura','Century Gothic',sans-serif;">
+        Everything you need to grow
+      </h2>
+      <p style="font-size:18px; color:#59595C; max-width:520px; margin:0 auto; line-height:1.7;">
+        The IC brings together space, equipment, expertise, and community — all under one roof at Nova Labs.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px;">
+
+      <div class="feature-card reveal">
+        <div style="width:56px; height:56px; background:#FEF0EB; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-table-cells-large" style="font-size:24px; color:#F36E3D;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Dedicated workspace</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          IC members get access to a dedicated section of Nova Labs set up specifically for product development and small business work.
+        </p>
+      </div>
+
+      <div class="feature-card reveal" style="transition-delay:0.07s;">
+        <div style="width:56px; height:56px; background:#E5F7F9; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-screwdriver-wrench" style="font-size:24px; color:#00AABD;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Full equipment access</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          Laser cutters, 3D printers, CNC routers, woodworking tools, metalworking equipment — all available to IC members as part of Nova Labs.
+        </p>
+      </div>
+
+      <div class="feature-card reveal" style="transition-delay:0.14s;">
+        <div style="width:56px; height:56px; background:#FEF0EB; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-people-group" style="font-size:24px; color:#F36E3D;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Entrepreneur community</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          Connect with fellow IC members who are building businesses just like yours. Share knowledge, solve problems together, and cheer each other on.
+        </p>
+      </div>
+
+      <div class="feature-card reveal" style="transition-delay:0.21s;">
+        <div style="width:56px; height:56px; background:#E5F7F9; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-chart-line" style="font-size:24px; color:#00AABD;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Business resources</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          Workshops, mentorship sessions, and networking events designed to help you handle the business side — pricing, branding, selling, and more.
+        </p>
+      </div>
+
+      <div class="feature-card reveal" style="transition-delay:0.28s;">
+        <div style="width:56px; height:56px; background:#FEF0EB; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-shop" style="font-size:24px; color:#F36E3D;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Marketplace visibility</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          Get your business featured in IC showcases, events, and online — putting your work in front of people who love to support local makers.
+        </p>
+      </div>
+
+      <div class="feature-card reveal" style="transition-delay:0.35s;">
+        <div style="width:56px; height:56px; background:#E5F7F9; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+          <i class="fa-solid fa-graduation-cap" style="font-size:24px; color:#00AABD;"></i>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; color:#1A1A1A; margin:0 0 12px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Classes &amp; workshops</h3>
+        <p style="color:#59595C; line-height:1.7; font-size:16px; margin:0;">
+          Learn new skills or sharpen existing ones with hands-on classes taught by experienced members and local experts.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     WORKSHOP SCHEDULE
+════════════════════════════════════════════ -->
+<section id="workshop-schedule">
+  <div style="margin:0 auto;max-width:1024px;padding:16px 16px 192px;">
+
+    <h2 id="ws-heading" style="margin-bottom:80px;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;color:#F5F5F5;font-family:'Futura','Century Gothic','Trebuchet MS',sans-serif;">
+      Workshop Schedule
+    </h2>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">3D Printing Basics</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Mar 22nd</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Fabrication Lab</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">Laser Cutting 101</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Mar 27th</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Laser Studio</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">Electronics &amp; Soldering</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Apr 3rd</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Electronics Bench</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">Woodworking Fundamentals</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Apr 10th</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Wood Shop</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">Small Business Bootcamp</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Apr 17th</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>IC Event Space</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">Product Photography</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">Apr 24th</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Studio Room</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+    <div class="ws-item">
+      <div>
+        <p style="margin:0 0 6px;font-size:20px;color:#F5F5F5;font-family:'Futura','Century Gothic',sans-serif;">CNC Machining Intro</p>
+        <p style="margin:0;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">May 1st</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.38);letter-spacing:0.07em;font-family:'Futura','Century Gothic',sans-serif;">
+        <span>Machine Shop</span><i class="fa-solid fa-location-dot" style="font-size:11px;"></i>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CURRENT BUSINESSES
+════════════════════════════════════════════ -->
+<section id="businesses" class="section-py" style="background:#F5F5F5;">
+  <div class="content-wrap">
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px;" class="reveal">
+      <div>
+        <div class="section-eyebrow eyebrow-orange" style="margin-bottom:12px;">
+          <i class="fa-solid fa-store" style="font-size:13px;"></i>
+          IC businesses
+        </div>
+        <h2 style="font-size:clamp(26px,4.5vw,44px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#1A1A1A; margin:0; font-family:'Futura','Century Gothic',sans-serif;">
+          Meet the makers behind the brands
+        </h2>
+      </div>
+      <p style="color:#59595C; max-width:340px; font-size:16px; line-height:1.7; margin:0;">
+        These are real businesses, built by Nova Labs members — your neighbors, working with their hands, right here.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
+
+      <!-- Business 1 -->
+      <article class="biz-card reveal">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/3D3D40/FAC3AF?text=Ember+%26+Wire" alt="Ember & Wire jewelry" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-orange">Jewelry</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2021</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Ember &amp; Wire</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Hand-formed metalwork jewelry made using Nova Labs' metalworking studio. Each piece is one-of-a-kind, inspired by the natural landscapes of the Mid-Atlantic.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Jordan M., member since 2019
+          </p>
+        </div>
+      </article>
+
+      <!-- Business 2 -->
+      <article class="biz-card reveal" style="transition-delay:0.08s;">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/2A2A2A/F36E3D?text=Bolt+%26+Grain" alt="Bolt & Grain furniture" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-teal">Woodworking</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2020</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Bolt &amp; Grain</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Custom furniture and home goods crafted from reclaimed wood and salvaged metal. Built to last and designed with intention in the Nova Labs woodshop.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Priya K., member since 2018
+          </p>
+        </div>
+      </article>
+
+      <!-- Business 3 -->
+      <article class="biz-card reveal" style="transition-delay:0.16s;">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/1A1A1A/00AABD?text=Circuit+Roots" alt="Circuit Roots electronics" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-orange">Electronics</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2022</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Circuit Roots</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Electronics repair and custom builds for vintage audio and home automation. Bringing old gear back to life and building new things that actually work the way you want.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Dev R., member since 2021
+          </p>
+        </div>
+      </article>
+
+      <!-- Business 4 -->
+      <article class="biz-card reveal" style="transition-delay:0.08s;">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/59595C/FEF0EB?text=The+Pressed+Canvas" alt="The Pressed Canvas printing" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-teal">Screen printing</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2019</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">The Pressed Canvas</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Custom screen-printed apparel, totes, and posters for local bands, businesses, and community groups. No order is too small or too weird.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Ama T., member since 2017
+          </p>
+        </div>
+      </article>
+
+      <!-- Business 5 -->
+      <article class="biz-card reveal" style="transition-delay:0.16s;">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/3D3D40/7FD4DF?text=Stitch+Lab" alt="Stitch Lab textiles" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-orange">Textiles</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2023</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Stitch Lab</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Handmade bags and accessories with an industrial-meets-sustainable approach. Using reclaimed fabrics and hardware sourced from local suppliers.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Lena V., member since 2022
+          </p>
+        </div>
+      </article>
+
+      <!-- Business 6 -->
+      <article class="biz-card reveal" style="transition-delay:0.24s;">
+        <div class="biz-card-img">
+          <img src="https://placehold.co/480x360/2A2A2A/FAC3AF?text=Forge+Forward" alt="Forge Forward ceramics" loading="lazy" />
+        </div>
+        <div style="padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span class="tag tag-teal">Ceramics</span>
+            <span style="font-family:'Futura',sans-serif; font-size:12px; color:#A0A0A0; letter-spacing:0.04em;">Est. 2022</span>
+          </div>
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Forge Forward</h3>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Functional ceramics and sculptural pieces for everyday use. Hand-thrown and finished in a shared studio, each batch a little different from the last.
+          </p>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0; letter-spacing:0.02em;">
+            <i class="fa-solid fa-user" style="font-size:11px; margin-right:6px;"></i>
+            Sam O., member since 2020
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     MEMBER SPOTLIGHTS — BUILDING SOMETHING NEW
+════════════════════════════════════════════ -->
+<section id="members" class="section-py" style="background:#E5F7F9;">
+  <div class="content-wrap">
+
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <div class="section-eyebrow eyebrow-teal" style="justify-content:center; margin-bottom:12px;">
+        <i class="fa-solid fa-seedling" style="font-size:13px;"></i>
+        In the making
+      </div>
+      <h2 style="font-size:clamp(26px,4.5vw,44px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#1A1A1A; margin:0 auto 16px; max-width:560px; font-family:'Futura','Century Gothic',sans-serif;">
+        Members building something new
+      </h2>
+      <p style="color:#59595C; max-width:480px; margin:0 auto; font-size:18px; line-height:1.7;">
+        Every successful IC business started with an idea and a workbench. Here are a few members in the early stages of building theirs.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
+
+      <!-- Spotlight 1 -->
+      <article class="spotlight-card reveal">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/1A1A1A/00AABD?text=Sarah+Chen" alt="Sarah Chen working on smart home devices" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-teal" style="font-size:11px;">Smart home</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Sarah Chen</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2023</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Sarah is developing a line of low-cost smart home sensor kits aimed at renters who can't do permanent installations. She prototypes at Nova Labs every weekend, testing hardware iterations in the electronics lab.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "Being around other IC members keeps me going. When I get stuck, there's always someone who's been stuck in the exact same spot."
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spotlight 2 -->
+      <article class="spotlight-card reveal" style="transition-delay:0.1s;">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/2A2A2A/F36E3D?text=Marcus+Rivera" alt="Marcus Rivera with woodworking tools" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-orange" style="font-size:11px;">Toolmaking</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Marcus Rivera</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2022</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Marcus is turning his obsession with hand-tool woodworking into a small-batch tool business — building marking gauges and chisels that compete with the expensive imports. He's using the IC's metalworking and finishing areas to dial in his process.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "I couldn't afford the equipment on my own. The IC made it possible to actually test my ideas without betting everything."
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spotlight 3 -->
+      <article class="spotlight-card reveal" style="transition-delay:0.2s;">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/59595C/E5F7F9?text=Fiona+Okafor" alt="Fiona Okafor with laser-cut products" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-teal" style="font-size:11px;">Laser craft</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Fiona Okafor</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2024</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Fiona creates laser-cut educational puzzles and games for kids, aimed at making science and math more tactile. She's working on her first production run and figuring out packaging, pricing, and her first wholesale pitch.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "I knew how to make things, but the IC has been teaching me how to think about making things as a business."
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spotlight 4 -->
+      <article class="spotlight-card reveal">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/2A2A2A/FAC3AF?text=Ray+Osei" alt="Ray Osei with 3D printed parts" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-orange" style="font-size:11px;">3D printing</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Ray Osei</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2023</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Ray is developing a line of custom 3D-printed ergonomic desk accessories. He's using the IC's printing lab to iterate on materials and finishes before committing to a small production run.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "The IC gave me access to equipment I'd never be able to afford on my own. That changes everything."
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spotlight 5 -->
+      <article class="spotlight-card reveal" style="transition-delay:0.1s;">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/3D3D40/7FD4DF?text=Nadia+Flores" alt="Nadia Flores with leather goods" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-teal" style="font-size:11px;">Leather goods</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Nadia Flores</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2022</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Nadia hand-stitches minimalist leather wallets and bags using traditional saddle-stitch techniques. She's refining her patterns and building a small online shop while working through the IC's maker support program.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "I've learned more about running a business in six months here than in years of trying on my own."
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spotlight 6 -->
+      <article class="spotlight-card reveal" style="transition-delay:0.2s;">
+        <div style="position:relative; overflow:hidden; aspect-ratio:3/2;">
+          <img src="https://placehold.co/540x360/1A1A1A/F36E3D?text=Tom+Keller" alt="Tom Keller with electronics project" loading="lazy"
+               style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+          <div style="position:absolute; bottom:16px; left:20px;">
+            <span class="tag tag-orange" style="font-size:11px;">Wearables</span>
+          </div>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:22px; font-weight:700; color:#1A1A1A; margin:0 0 4px; font-family:'Futura','Century Gothic',sans-serif; letter-spacing:-0.01em;">Tom Keller</h3>
+          <p style="font-family:'Futura',sans-serif; font-size:13px; color:#00AABD; font-weight:600; margin:0 0 14px; letter-spacing:0.02em;">Member since 2024</p>
+          <p style="color:#59595C; font-size:16px; line-height:1.7; margin:0 0 16px;">
+            Tom is prototyping open-source wearable sensor patches for athletes and coaches who want data without the subscription fees. Early testers are already giving him feedback on comfort and accuracy.
+          </p>
+          <div style="background:#F5F5F5; border-radius:8px; padding:14px 16px;">
+            <p style="font-size:15px; color:#3D3D40; font-style:italic; font-family:'Source Serif 4','Georgia',serif; margin:0; line-height:1.6;">
+              "Having a community of engineers and makers to bounce ideas off makes the hard parts so much less lonely."
+            </p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS / JOIN STEPS
+════════════════════════════════════════════ -->
+<section style="background:#FFFFFF;" class="section-py">
+  <div class="content-wrap">
+
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <div class="section-eyebrow eyebrow-orange" style="justify-content:center; margin-bottom:12px;">
+        <i class="fa-solid fa-map-signs" style="font-size:13px;"></i>
+        How it works
+      </div>
+      <h2 style="font-size:clamp(26px,4.5vw,44px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#1A1A1A; margin:0 auto; max-width:500px; font-family:'Futura','Century Gothic',sans-serif;">
+        Getting started is straightforward
+      </h2>
+    </div>
+
+    <div class="steps-grid">
+
+      <!-- Connector line (desktop only) -->
+      <div style="position:absolute; top:32px; left:12.5%; right:12.5%; height:2px; background:linear-gradient(to right, #FAC3AF, #7FD4DF); z-index:0; display:none;" class="md-connector"></div>
+
+      <div class="reveal step-item" style="position:relative; z-index:1;">
+        <div class="step-circle" style="width:64px; height:64px; background:#FEF0EB; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid #FAC3AF;">
+          <span style="font-family:'Futura',sans-serif; font-size:22px; font-weight:700; color:#F36E3D;">1</span>
+        </div>
+        <div class="step-text">
+          <h4 style="font-size:18px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif;">Join Nova Labs</h4>
+          <p style="color:#59595C; font-size:15px; line-height:1.7; margin:0;">Become a Nova Labs member to access the building, equipment, and community.</p>
+        </div>
+      </div>
+
+      <div class="reveal step-item" style="position:relative; z-index:1; transition-delay:0.1s;">
+        <div class="step-circle" style="width:64px; height:64px; background:#E5F7F9; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid #7FD4DF;">
+          <span style="font-family:'Futura',sans-serif; font-size:22px; font-weight:700; color:#00AABD;">2</span>
+        </div>
+        <div class="step-text">
+          <h4 style="font-size:18px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif;">Add IC access</h4>
+          <p style="color:#59595C; font-size:15px; line-height:1.7; margin:0;">IC membership is an add-on tier. Tell us about your project and we'll get you set up.</p>
+        </div>
+      </div>
+
+      <div class="reveal step-item" style="position:relative; z-index:1; transition-delay:0.2s;">
+        <div class="step-circle" style="width:64px; height:64px; background:#FEF0EB; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid #FAC3AF;">
+          <span style="font-family:'Futura',sans-serif; font-size:22px; font-weight:700; color:#F36E3D;">3</span>
+        </div>
+        <div class="step-text">
+          <h4 style="font-size:18px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif;">Meet the community</h4>
+          <p style="color:#59595C; font-size:15px; line-height:1.7; margin:0;">Show up to IC open nights and monthly meetups. Find your people.</p>
+        </div>
+      </div>
+
+      <div class="reveal step-item" style="position:relative; z-index:1; transition-delay:0.3s;">
+        <div class="step-circle" style="width:64px; height:64px; background:#E5F7F9; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid #7FD4DF;">
+          <span style="font-family:'Futura',sans-serif; font-size:22px; font-weight:700; color:#00AABD;">4</span>
+        </div>
+        <div class="step-text">
+          <h4 style="font-size:18px; font-weight:700; color:#1A1A1A; margin:0 0 8px; font-family:'Futura','Century Gothic',sans-serif;">Build your business</h4>
+          <p style="color:#59595C; font-size:15px; line-height:1.7; margin:0;">Use the space, equipment, and community to turn your idea into something real.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     JOIN CTA
+════════════════════════════════════════════ -->
+<section id="join" style="background:#1A1A1A; position:relative; overflow:hidden;" class="grain">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 60% 100% at 0% 50%, rgba(243,110,61,0.15) 0%, transparent 55%), radial-gradient(ellipse 60% 100% at 100% 50%, rgba(0,170,189,0.12) 0%, transparent 55%); z-index:1; pointer-events:none;"></div>
+
+  <div class="content-wrap" style="position:relative; z-index:2; padding-top:72px; padding-bottom:72px; text-align:center;">
+
+    <div class="reveal">
+      <div class="section-eyebrow" style="justify-content:center; margin-bottom:20px; color:#F36E3D;">
+        <i class="fa-solid fa-rocket" style="font-size:14px;"></i>
+        Ready to build?
+      </div>
+
+      <h2 style="font-size:clamp(28px,5.5vw,55px); font-weight:700; line-height:1.15; letter-spacing:-0.03em; color:#F5F5F5; margin:0 auto 24px; max-width:620px; font-family:'Futura','Century Gothic',sans-serif;">
+        Your idea deserves a real shot
+      </h2>
+
+      <p style="font-size:20px; color:#D6D6D7; max-width:520px; margin:0 auto 40px; line-height:1.7; font-family:'Source Serif 4','Georgia',serif;">
+        Whether you've got a half-finished prototype or just a spark of an idea, the IC has a place for you. Come in, look around, and meet the people building things right now.
+      </p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center;">
+        <a href="#" class="btn-primary" style="font-size:17px; padding:16px 36px;">
+          <i class="fa-solid fa-arrow-right"></i>
+          Apply for IC membership
+        </a>
+        <a href="#" class="btn-outline-white" style="font-size:17px; padding:16px 36px;">
+          Tour the space
+        </a>
+      </div>
+
+      <p style="font-family:'Futura',sans-serif; font-size:14px; color:#A0A0A0; margin:24px 0 0; letter-spacing:0.02em;">
+        Questions? Email us at <a href="mailto:support@nova-labs.org" style="color:#00AABD; text-decoration:none; transition:color 0.18s ease;" onmouseover="this.style.color='#7FD4DF'" onmouseout="this.style.color='#00AABD'">support@nova-labs.org</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="content-wrap" style="padding-top:48px; padding-bottom:32px;">
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px; margin-bottom:48px;">
+
+      <!-- Brand column -->
+      <div style="grid-column: span 1;">
+        <img src="brand_assets/NL_IC.png" alt="Nova Labs Innovation Center" style="height:48px; width:auto; margin-bottom:20px;" />
+        <p style="color:#A0A0A0; font-size:15px; line-height:1.7; margin:0 0 20px; max-width:260px;">
+          A community of makers turning hobbies into businesses at Nova Labs in Fairfax, Virginia.
+        </p>
+      </div>
+
+      <!-- IC Links -->
+      <div>
+        <h4 style="font-family:'Futura','Century Gothic',sans-serif; font-size:13px; font-weight:600; color:#F5F5F5; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 16px;">Innovation Center</h4>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">About the IC</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Featured businesses</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Member spotlights</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Events &amp; workshops</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Apply for membership</a></li>
+        </ul>
+      </div>
+
+      <!-- Nova Labs links -->
+      <div>
+        <h4 style="font-family:'Futura','Century Gothic',sans-serif; font-size:13px; font-weight:600; color:#F5F5F5; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 16px;">Nova Labs</h4>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">About Nova Labs</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Membership</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Equipment &amp; tools</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Classes</a></li>
+          <li><a href="#" style="color:#A0A0A0; text-decoration:none; font-size:15px; font-family:'Futura',sans-serif;">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div>
+        <h4 style="font-family:'Futura','Century Gothic',sans-serif; font-size:13px; font-weight:600; color:#F5F5F5; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 16px;">Find us</h4>
+        <address style="font-style:normal; color:#A0A0A0; font-size:15px; line-height:1.7; font-family:'Futura',sans-serif;">
+          <p style="margin:0 0 8px;">3850 Jermantown Rd.<br/>Fairfax, VA 22030</p>
+          <p style="margin:0 0 8px;"><a href="tel:+17034375780" style="color:#A0A0A0; text-decoration:none;">703-437-5780</a></p>
+          <p style="margin:0;"><a href="mailto:support@nova-labs.org" style="color:#00AABD; text-decoration:none;">support@nova-labs.org</a></p>
+        </address>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid #2E2E2E; padding-top:24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <p style="color:#5A5A5A; font-family:'Futura',sans-serif; font-size:13px; margin:0 0 4px; letter-spacing:0.02em;">
+          © 2026 Nova Labs®, Inc. All rights reserved.
+        </p>
+        <p style="color:#5A5A5A; font-family:'Futura',sans-serif; font-size:13px; margin:0; letter-spacing:0.02em;">
+          Nova Labs, Inc. is a 501(c)(3) nonprofit organization. EIN 45-3796580
+        </p>
+      </div>
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <a href="#" style="color:#5A5A5A; font-family:'Futura',sans-serif; font-size:13px; text-decoration:none;">Privacy policy</a>
+        <a href="#" style="color:#5A5A5A; font-family:'Futura',sans-serif; font-size:13px; text-decoration:none;">Terms of use</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ─── Scroll Parallax Hero ───
+  (function () {
+    // ── Phase breakpoints (px of scroll) ──────────────────────────
+    // 0      → 1200  : clip-path expands, parallax images active
+    // 900    → 1300  : parallax images fade out (globally)
+    // 1300   → 1700  : hero headline + CTAs fade in
+    // 2000   → 2500  : center image + headline fade out together
+    // ──────────────────────────────────────────────────────────────
+    const CLIP_END        = 1200;
+    const PARA_FADE_START =  900;
+    const PARA_FADE_END   = 1300;
+    const TEXT_IN_START   = 1200;
+    const TEXT_IN_END     = 1500;
+    const IMG_FADE_START  = 1500;
+    const IMG_FADE_END    = 1900;
+
+    const centerImg = document.getElementById('hero-center-img');
+    const heroText  = document.getElementById('hero-text-overlay');
+
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function lerp(a, b, t)    { return a + (b - a) * clamp(t, 0, 1); }
+
+    function updateHero() {
+      const scrollY = window.scrollY;
+
+      // Clip-path: expands from center over 0→CLIP_END px
+      const clip1 = lerp(25, 0, scrollY / CLIP_END);
+      const clip2 = lerp(75, 100, scrollY / CLIP_END);
+      centerImg.style.clipPath = `polygon(${clip1}% ${clip1}%, ${clip2}% ${clip1}%, ${clip2}% ${clip2}%, ${clip1}% ${clip2}%)`;
+
+      // Background-size: 170% → 100% over 0→IMG_FADE_START
+      centerImg.style.backgroundSize = lerp(170, 100, scrollY / IMG_FADE_START) + '%';
+
+      // Center image: fades out IMG_FADE_START→IMG_FADE_END
+      const imgOpacity = lerp(1, 0, (scrollY - IMG_FADE_START) / (IMG_FADE_END - IMG_FADE_START));
+      centerImg.style.opacity = imgOpacity;
+
+      // Global parallax fade: all images out by PARA_FADE_END
+      const globalParaOpacity = lerp(1, 0, (scrollY - PARA_FADE_START) / (PARA_FADE_END - PARA_FADE_START));
+
+      // Hero text: in TEXT_IN_START→TEXT_IN_END, then out with the image
+      const textIn  = lerp(0, 1, (scrollY - TEXT_IN_START) / (TEXT_IN_END - TEXT_IN_START));
+      const textOut = lerp(1, 0, (scrollY - IMG_FADE_START) / (IMG_FADE_END - IMG_FADE_START));
+      const textOpacity = Math.min(textIn, textOut);
+      heroText.style.opacity = textOpacity;
+
+      // Accessibility: make overlay reachable only when visible
+      const textVisible = textOpacity > 0.5;
+      heroText.style.pointerEvents = textVisible ? 'auto' : 'none';
+      heroText.setAttribute('aria-hidden', textVisible ? 'false' : 'true');
+
+      // Parallax images: individual scroll progress + global fade-out
+      document.querySelectorAll('.para-img').forEach(function (img) {
+        const startVal   = parseFloat(img.dataset.start);
+        const endVal     = parseFloat(img.dataset.end);
+        const rect       = img.getBoundingClientRect();
+        const viewH      = window.innerHeight;
+        const totalRange = viewH + img.offsetHeight + Math.abs(startVal) + Math.abs(endVal);
+        const traveled   = viewH - rect.top + Math.abs(startVal);
+        const progress   = clamp(traveled / totalRange, 0, 1);
+        const y          = lerp(startVal, endVal, progress);
+        const indivOp    = progress > 0.75 ? lerp(1, 0, (progress - 0.75) / 0.25) : 1;
+        const scale      = progress > 0.75 ? lerp(1, 0.85, (progress - 0.75) / 0.25) : 1;
+        img.style.transform = `translateY(${y}px) scale(${scale})`;
+        img.style.opacity   = Math.min(indivOp, Math.max(0, globalParaOpacity));
+      });
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () { updateHero(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+    updateHero();
+
+    // Workshop schedule: reveal items on scroll
+    const wsObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity   = '1';
+          entry.target.style.transform = 'translateY(0)';
+          wsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const wsHeading = document.getElementById('ws-heading');
+    if (wsHeading) wsObserver.observe(wsHeading);
+    document.querySelectorAll('.ws-item').forEach(function (el, i) {
+      el.style.transitionDelay = (i * 0.06) + 's';
+      wsObserver.observe(el);
+    });
+  })();
+
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    const open = menu.style.display !== 'none';
+    menu.style.display = open ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', !open);
+    btn.querySelector('i').className = open ? 'fa-solid fa-bars' : 'fa-solid fa-xmark';
+  });
+
+  // Close mobile menu when a link is clicked
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.querySelector('i').className = 'fa-solid fa-bars';
+    });
+  });
+
+  // Scroll-reveal — double rAF ensures first paint renders content visible,
+  // then JS hides elements and the observer unhides them as they enter the viewport.
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Small delay preserves any transition-delay set inline
+        const delay = parseFloat(entry.target.style.transitionDelay) || 0;
+        setTimeout(() => {
+          entry.target.classList.remove('reveal-hidden');
+        }, delay * 1000);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -24px 0px' });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      revealEls.forEach(el => {
+        el.classList.add('reveal-anim', 'reveal-hidden');
+        revealObserver.observe(el);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
