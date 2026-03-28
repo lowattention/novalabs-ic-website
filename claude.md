@@ -2,6 +2,7 @@
 
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+- **Read `member-plan.md`** before making any changes to the members area (`members/`, `api/`, `vercel.json`). All architectural decisions for that feature are documented there.
 
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
