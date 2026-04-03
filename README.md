@@ -1,5 +1,5 @@
 # novalabs-ic-website
-Website for Nova Labs Innovation Center
+Static version of the Nova Labs Innovation Center Website
 
 ## Local Development
 
